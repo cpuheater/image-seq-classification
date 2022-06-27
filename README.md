@@ -25,6 +25,7 @@ tensorboard --logdir ./runs
 The network is trained end2end, it uses a CNN model to embed each image into a feature vector state,
 and GRU for sequence processing, using recurrent network allows processing of sequences of arbitrary length. The model is train for 12 epochs as it starts to over-fit the training data if it's trained longer.
 Loss, accuracy, and f1 score (dataset is unbalanced, there are twice as many positive examples compared to negative) is used as performance metrics. Model achieve accuracy: 99.50 and F1 score 0.996115 on validation dataset.
+To speedup training process we could use the collate_fn() function from DataLoader to limit (if possible) the number of dummy images we use to pad the sequence to be equal to 30.
 During inference sequences longer than 30 images are used.
 
 ![Metrics](resources/metrics.png)
