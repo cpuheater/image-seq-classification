@@ -67,7 +67,7 @@ def train(epoch, train_loader, valid_loader, criterion, start):
     print('[{}] Train Epoch: {} Loss: {:.2f} Accuracy: {:.6f}'.format(time_since(start),
                                                                       epoch, train_loss, 100 * train_accuracy/len(train_loader.dataset)))
     writer.add_scalar("train/loss", train_loss, epoch)
-    writer.add_scalar("train/accuracy", train_accuracy/len(train_loader), epoch)
+    writer.add_scalar("train/accuracy", 100 * train_accuracy/len(train_loader.dataset), epoch)
     valid_loss = 0
     valid_accuracy = 0
     valid_epoch_pred = []
@@ -86,7 +86,7 @@ def train(epoch, train_loader, valid_loader, criterion, start):
 
     valid_f1 = calc_f1(torch.cat(valid_epoch_pred), torch.cat(valid_epoch_target))
     writer.add_scalar("valid/loss", valid_loss, epoch)
-    writer.add_scalar("valid/accuracy", valid_accuracy/len(valid_loader.dataset), epoch)
+    writer.add_scalar("valid/accuracy", 100 * valid_accuracy/len(valid_loader.dataset), epoch)
     writer.add_scalar("valid/F1", valid_f1, epoch)
     print('[{}] Valid Epoch: {} Loss: {:.6f} Accuracy: {:.2f} F1: {:.6f}'.format(time_since(start), epoch, valid_loss,
                                                                       100 * valid_accuracy/len(valid_loader.dataset), valid_f1))
